@@ -8,7 +8,7 @@ import json
 from tarifs import fetch_and_save_data
 
 
-API_TOKEN = '7638142338:AAFl2w7mtLn2kRZ7Q-wizj5eQPEJmBYucXs'
+API_TOKEN = 'your token'
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher()
