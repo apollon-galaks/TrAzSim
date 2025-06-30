@@ -8,7 +8,10 @@ import json
 from tarifs import fetch_and_save_data
 
 
-API_TOKEN = 'your token'
+##TODO: Function to check if the phone supports eSIM
+##TODO: Buy server and connect bot to the server
+
+API_TOKEN = '7638142338:AAFl2w7mtLn2kRZ7Q-wizj5eQPEJmBYucXs'
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher()
@@ -56,7 +59,7 @@ async def handle_language_choice(callback: types.CallbackQuery):
     user_languages[user_id] = lang
 
     await callback.answer()
-    await callback.message.edit_text(f"😌")
+    await callback.message.edit_text(f"✔")
 
     # Теперь предложим выбрать валюту
     buttons_cur = [
@@ -105,7 +108,7 @@ async def handle_currency_choice(callback: types.CallbackQuery):
         )
 
     await callback.answer()
-    await callback.message.edit_text(f"🤑")
+    await callback.message.edit_text(f"✔")
     await bot.send_message(user_id, info_text)
 
     await show_main_menu(user_id)
@@ -166,10 +169,17 @@ async def handle_info(callback: types.CallbackQuery):
 
     if lang == "lang_ru":
         text = (
-        "ℹ️ Информация:\n\n"
-        "TravelESIM — это удобное подключение eSIM в путешествиях. "
-        "Вы можете выбрать страну, оплатить тариф и получить eSIM для своего устройства."
-    )
+    "ℹ️ TravelESIM — твой идеальный спутник в путешествиях. \n"
+    "Забудь о дорогом роуминге и поиске Wi-Fi! \n\n"
+    
+    "С помощью бота ты можешь:\n"
+    "🌍 Выбрать страну\n"
+    "💳 Купить удобный тариф\n"
+    "📲 Мгновенно получить eSIM\n\n"
+    
+    "Путешествуй свободно — связь всегда с тобой."
+)
+
         keyboard = InlineKeyboardMarkup(
         inline_keyboard=[
             [InlineKeyboardButton(text="🔙 Назад", callback_data="back_to_menu")]
@@ -179,9 +189,15 @@ async def handle_info(callback: types.CallbackQuery):
         
     elif lang == "lang_az":
         text = (
-        "ℹ️ Məlumat: \n\n"
-        "TravelESIM — səyahətlərdə eSIM üçün rahat bağlantıdır. "
-        "Ölkəni seçin, tarifi ödəyin və cihazınız üçün eSIM əldə edin."
+        "ℹ️ TravelESIM — sənin səyahətdə ideal yoldaşındır. \n"
+         "Bahalı rouminqi və Wi-Fi axtarışını unut! \n\n"
+         
+         "Bot vasitəsilə sən:\n"
+         "🌍 Ölkə seçə bilərsən\n"
+         "💳 Rahat tarif ala bilərsən\n"
+         "📲 eSIM-i dərhal əldə edə bilərsən\n\n"
+
+         "Sərbəst səyahət et — əlaqə həmişə səninlədir."
 
     )
         keyboard = InlineKeyboardMarkup(
@@ -193,11 +209,17 @@ async def handle_info(callback: types.CallbackQuery):
     
     elif lang == "lang_en":
         text = (
-        "ℹ️ Info: \n\n"
+    "ℹ️ TravelESIM — your perfect travel companion. \n"
+    "Forget expensive roaming and searching for Wi-Fi! \n\n"
+    
+    "With the bot, you can:\n"
+    "🌍 Choose a country\n"
+    "💳 Buy a convenient plan\n"
+    "📲 Instantly receive your eSIM\n\n"
+    
+    "Travel freely — stay connected wherever you go."
+)
 
-        "TravelESIM is a convenient eSIM connection for travelers. "
-        "You can choose your country, pay for a plan, and get an eSIM for your device."
-    )
         keyboard = InlineKeyboardMarkup(
         inline_keyboard=[
             [InlineKeyboardButton(text="🔙 Back", callback_data="back_to_menu")]
@@ -264,7 +286,7 @@ async def how_to_activate(callback: types.CallbackQuery):
         info_text = ("1️⃣ Al \n\n"
         "eSIM planı seçin, platformada qeydiyyatdan keçin və alışınızı tamamlayın.\n\n"
         "2️⃣ Quraşdırın və Aktivləşdirin \n\n"
-        "eSIM quraşdırmaq üçün QR kodunu skan edin. İlk data istifadəsi ilə xəttiniz aktivləşdiriləcək.\n\n"
+        "eSIM quraşdırmaq üçün QR kodunu skan edin və ya linkə keçid edin. İlk data istifadəsi ilə xəttiniz aktivləşdiriləcək.\n\n"
         "3️⃣ İdarə et \n\n"
         "Xətt təfərrüatlarına baxın və şəxsi hesabınızdan eSIM-ə nəzarət edin.\n\n"
         "4️⃣ Yenidən doldurun \n\n"
@@ -277,7 +299,7 @@ async def how_to_activate(callback: types.CallbackQuery):
         info_text = ("1️⃣ Купите \n\n"
         "Выберите eSIM-план, зарегистрируйтесь на платформе и завершите покупку.\n\n"
         "2️⃣ Установите и активируйте \n\n"
-        "Отсканируйте QR-код для установки eSIM. Ваша линия будет активирована при первом использовании интернета.\n\n"
+        "Отсканируйте QR-код для установки eSIM либо перейдите по ссылке. Ваша линия будет активирована при первом использовании интернета.\n\n"
         "3️⃣ Управляйте \n\n"
         "Просматривайте детали линии и контролируйте eSIM через ваш личный кабинет.\n\n"
         "4️⃣ Пополните \n\n"
@@ -291,7 +313,7 @@ async def how_to_activate(callback: types.CallbackQuery):
         info_text = ("1️⃣ Buy \n\n"
         "Choose an eSIM plan, register on the platform and complete your purchase.\n\n"
         "2️⃣ Install and Activate \n\n"
-        "Scan the QR code to set up your eSIM. Your line will be activated with the first data usage.\n\n"
+        "Scan the QR code to set up your eSIM or follow the link. Your line will be activated with the first data usage.\n\n"
         "3️⃣ Manage \n\n"
         "View line details and manage your eSIM from your personal account.\n\n"
         "4️⃣ Refill \n\n"
