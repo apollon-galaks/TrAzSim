@@ -321,6 +321,21 @@ async def how_to_activate(callback: types.CallbackQuery):
         mess = "Back"
         dir = "en"
         act = "Buy eSim"
+            
+    
+    else:
+        info_text = ("1️⃣ Buy \n\n"
+        "Choose an eSIM plan, register on the platform and complete your purchase.\n\n"
+        "2️⃣ Install and Activate \n\n"
+        "Scan the QR code to set up your eSIM or follow the link. Your line will be activated with the first data usage.\n\n"
+        "3️⃣ Manage \n\n"
+        "View line details and manage your eSIM from your personal account.\n\n"
+        "4️⃣ Refill \n\n"
+        "If you need additional connectivity, top up your eSIM with a new data plan.")
+        mess = "Back"
+        dir = "en"
+        act = "Buy eSim"
+
 
 
     keyboard = InlineKeyboardMarkup(
