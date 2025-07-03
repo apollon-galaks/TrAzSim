@@ -31,12 +31,13 @@ async def on_startup(bot: Bot):
 #extracting data
 def get_local_country_data(callback: types.CallbackQuery):
     user_id = callback.from_user.id
-    lang = user_languages[user_id]
-    cur = user_currencies[user_id]
+    lang = user_languages.get(user_id, "lang_az")
+    cur = user_currencies.get(user_id, "azn")
     lang = lang.split("_")[1]
     with open(f"country_data_{lang}_{cur}.json", "r", encoding="utf-8") as f:
         data = json.load(f)
     return data.get("bundles", [])
+
 
 @dp.message(CommandStart())
 async def start_handler(message: types.Message):
@@ -77,7 +78,7 @@ async def handle_currency_choice(callback: types.CallbackQuery):
     user_id = callback.from_user.id
     user_currencies[user_id] = currency
 
-    lang = user_languages.get(user_id, "lang_ru")
+    lang = user_languages.get(user_id, "lang_en")
 
     if lang == "lang_ru":
         
@@ -115,7 +116,7 @@ async def handle_currency_choice(callback: types.CallbackQuery):
 
 async def show_main_menu(chat_id: int):
 
-    lang = user_languages.get(chat_id, "lang_ru")
+    lang = user_languages.get(chat_id, "lang_az")
 
     if lang == "lang_ru":
         mess = "👇 Выберите раздел"
@@ -415,8 +416,9 @@ async def get_tariff_text_by_id(country_id, callback):
         return "Страна с таким ID не найдена."
 
     user_id = callback.from_user.id
-    cur = user_currencies[user_id]
-    lang = user_languages[user_id]
+    cur = user_currencies.get(user_id, "azn")
+    lang = user_languages.get(user_id, "lang_az")
+
 
     if lang == "lang_en":
         mess1 = "Сountry"
