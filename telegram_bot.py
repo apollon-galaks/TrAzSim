@@ -11,7 +11,7 @@ from tarifs import fetch_and_save_data
 ##TODO: Function to check if the phone supports eSIM
 ##TODO: Buy server and connect bot to the server
 
-API_TOKEN = 'your token here'
+API_TOKEN = '7638142338:AAFl2w7mtLn2kRZ7Q-wizj5eQPEJmBYucXs'
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher()
